@@ -201,4 +201,4 @@ Your FlowCore BPM system is now running on AWS EKS. You can interact with the AP
 We welcome contributions to improve FlowCore BPM. Please submit a pull request or open an issue for any feature requests.
 
 ## License
-FlowCore BPM is released under the MIT License.
+FlowCore BPM is released under the Apache-2.0 license.
