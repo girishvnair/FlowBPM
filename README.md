@@ -109,25 +109,33 @@ FlowCore BPM is a modular, extensible BPM tool written in C++ that provides work
 ```bash
 git clone https://github.com/<your-github-username>/FlowCoreBPM.git
 cd FlowCoreBPM
+```
 Step 2: Build the Project
 Build the project using CMake. Each module will be compiled into static libraries that will be packaged into Docker images.
+```bash
 mkdir build
 cd build
 cmake ..
 make
+```
 Step 3: Dockerize the Application
 To deploy on AWS EKS, you will need to create a Docker image for each component (API gateway, core engine, etc.).
 
 Here is a sample Dockerfile for building a Docker image:
+```bash
 FROM ubuntu:latest
 RUN apt-get update && apt-get install -y g++
 COPY ./build /app
 WORKDIR /app
 CMD ["./FlowCoreBPM"]
+```
+Build the Docker image:
+```bash
 docker build -t flowcore-bpm:latest .
-
+```
 Step 4: Push Docker Image to Amazon ECR
 Tag and push your Docker image to Amazon Elastic Container Registry (ECR).
+```bash
 # Authenticate Docker to ECR
 aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <account-id>.dkr.ecr.<region>.amazonaws.com
 
@@ -136,9 +144,11 @@ docker tag flowcore-bpm:latest <account-id>.dkr.ecr.<region>.amazonaws.com/flowc
 
 # Push the image to ECR
 docker push <account-id>.dkr.ecr.<region>.amazonaws.com/flowcore-bpm:latest
+```
 Step 5: Deploy to AWS EKS
 Use Kubernetes manifests to deploy FlowCore BPM to your EKS cluster. Here is a sample deployment file.
 deployment.yaml:
+```bash
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -158,8 +168,9 @@ spec:
         image: <account-id>.dkr.ecr.<region>.amazonaws.com/flowcore-bpm:latest
         ports:
         - containerPort: 8080
-
+```
 service.yaml:
+```bash
 apiVersion: v1
 kind: Service
 metadata:
@@ -172,13 +183,18 @@ spec:
       port: 80
       targetPort: 8080
   type: LoadBalancer
+```
 Step 6: Apply Kubernetes Manifests
 Use kubectl to deploy the application to AWS EKS.
+```bash
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
+```
 Step 7: Access the Application
 After the service is deployed, you can retrieve the public endpoint using:
+```bash
 kubectl get svc flowcore-bpm-service
+```
 Conclusion
 Your FlowCore BPM system is now running on AWS EKS. You can interact with the API, monitor the system, and extend it with plugins.
 ## Contributing
