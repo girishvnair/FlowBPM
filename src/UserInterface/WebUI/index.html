@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowCore BPM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>FlowCore BPM</h1>
+        <div class="form-container">
+            <h2>Create a New Workflow</h2>
+            <form id="workflowForm">
+                <label for="workflowName">Workflow Name:</label>
+                <input type="text" id="workflowName" name="workflowName" required>
+                
+                <label for="taskName">Task Name:</label>
+                <input type="text" id="taskName" name="taskName" required>
+                
+                <button type="submit">Create Workflow</button>
+            </form>
+        </div>
+        <div id="workflowList">
+            <h2>Existing Workflows</h2>
+            <ul id="workflows"></ul>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
