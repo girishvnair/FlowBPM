@@ -51,11 +51,20 @@ FlowCore BPM is a free and open-source Business Process Management (BPM) and ERP
     ```bash
     ./deployment/scripts/dockerize.sh
     ```
+    Dockerfile
+    ```bash
+    FROM ubuntu:latest
+    RUN apt-get update && apt-get install -y g++
+    COPY . /app
+    WORKDIR /app
+    RUN g++ -o myapp main.cpp
+    CMD ["./myapp"]
+    ```
     ```bash
     #!/bin/bash
     docker build -t flowcore-bpm .
     ```
-2. **Push Image to Amazon ECR**:
+3. **Push Image to Amazon ECR**:
     Ensure your AWS CLI is configured. Then, push the Docker image:
     ```bash
     ./deployment/scripts/deploy.sh
