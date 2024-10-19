@@ -34,7 +34,13 @@ FlowCore BPM is a free and open-source Business Process Management (BPM) and ERP
     ```bash
     ./deployment/scripts/build.sh
     ```
-
+    ```bash
+        #!/bin/bash
+        mkdir -p build
+        cd build
+        cmake ..
+        make
+    ```
 3. **Run Unit Tests**:
     ```bash
     ./deployment/scripts/run-tests.sh
@@ -45,11 +51,20 @@ FlowCore BPM is a free and open-source Business Process Management (BPM) and ERP
     ```bash
     ./deployment/scripts/dockerize.sh
     ```
-
+    ```bash
+    #!/bin/bash
+    docker build -t flowcore-bpm .
+    ```
 2. **Push Image to Amazon ECR**:
     Ensure your AWS CLI is configured. Then, push the Docker image:
     ```bash
     ./deployment/scripts/deploy.sh
+    ```
+    ```bash
+    #!/bin/bash
+    aws ecr get-login-password --region <aws-region> | docker login --username AWS --password-stdin <aws-account-id>.dkr.ecr.<aws-region>.amazonaws.com
+    docker tag flowcore-bpm:latest <aws-account-id>.dkr.ecr.<aws-region>.amazonaws.com/flowcore-bpm:latest
+    docker push <aws-account-id>.dkr.ecr.<aws-region>.amazonaws.com/flowcore-bpm:latest
     ```
 
 ## AWS EKS Deployment
