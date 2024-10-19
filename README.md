@@ -224,8 +224,8 @@ Your FlowCore BPM system is now running on AWS EKS. You can interact with the AP
 ## Contributing
 We welcome contributions to improve FlowCore BPM. Please submit a pull request or open an issue for any feature requests.
 
-##Future scope 
-### Advanced and Specialized Plugins for FlowCore BPM
+### Future scope 
+## Advanced and Specialized Plugins for FlowCore BPM
 
 1. **Custom Reporting and Dashboard Plugin**  
    - **Purpose**: Allows users to create personalized reports and dashboards that aren't covered by the built-in analytics.
