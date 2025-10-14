@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flowbpm-deployment
+  namespace: flowbpm
+  labels:
+    app: flowbpm
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flowbpm
+  template:
+    metadata:
+      labels:
+        app: flowbpm
+    spec:
+      containers:
+      - name: flowbpm
+        image: <ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/flowbpm:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 15
+

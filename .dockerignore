@@ -1,0 +1,9 @@
+.git
+build
+deployment/eks
+*.log
+*.tmp
+*.pdf
+*.md
+*.sh
+
